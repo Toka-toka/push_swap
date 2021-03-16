@@ -27,18 +27,14 @@ int add_value(t_a *a, int value)
 int check_arv(char **arv, t_a *a)
 {
     int value;
-    int len1;
-    int len2;
+    char *temp;
     
     *arv++;
     while(*arv != NULL)
     {
         value = ft_atoi(*arv);
-        len1 = ft_strlen(*arv);
-        *arv = ft_itoa(value);
-        len2 = ft_strlen(*arv);
-        free(*arv);
-        if (len1 != len2)
+        temp = ft_itoa(value);
+        if (ft_strncmp(*arv, temp, ft_strlen(*arv)) != 0)
             return(1);
         if (add_value(a, value) != 0)
             return(1);
@@ -65,7 +61,7 @@ int main (int arc, char **arv)
         return(1);
     if (check_arv(arv, &a) == 1)
         printf("Wrong\n");
-    print(&a);
+//    print(&a);
     printf("OK\n");
     return(0);
 }
